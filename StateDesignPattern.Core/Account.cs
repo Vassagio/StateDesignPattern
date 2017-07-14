@@ -13,15 +13,7 @@ namespace StateDesignPattern.Core {
         {
             Balance = startingBalance;
             OnUnfreeze = onUnfreeze;
-            ManageUnfreezing = () =>
-            {
-                if (IsFrozen) {
-                    Unfreeze();
-                }
-                else {
-                    StayUnfrozen();
-                }
-            };
+            ManageUnfreezing = StayUnfrozen;
         }
 
         public void Deposit(decimal amount)
@@ -50,6 +42,7 @@ namespace StateDesignPattern.Core {
         {
             IsFrozen = false;
             OnUnfreeze();
+            ManageUnfreezing = StayUnfrozen;
         }
 
         private void StayUnfrozen() { }
@@ -71,6 +64,7 @@ namespace StateDesignPattern.Core {
             if (!IsVerified)
                 return;
             IsFrozen = true;
+            ManageUnfreezing = Unfreeze;
         }
     }
 }
