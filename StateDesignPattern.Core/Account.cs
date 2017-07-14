@@ -6,15 +6,26 @@ namespace StateDesignPattern.Core {
         internal bool IsVerified { get; private set; }
         internal bool IsClosed { get; private set; }
         internal bool IsFrozen { get; private set; }
-
         private Action OnUnfreeze { get; }
+        private Action ManageUnfreezing { get; set; }
 
-        public Account(decimal startingBalance, Action onUnfreeze) {
+        public Account(decimal startingBalance, Action onUnfreeze)
+        {
             Balance = startingBalance;
             OnUnfreeze = onUnfreeze;
+            ManageUnfreezing = () =>
+            {
+                if (IsFrozen) {
+                    Unfreeze();
+                }
+                else {
+                    StayUnfrozen();
+                }
+            };
         }
 
-        public void Deposit(decimal amount) {
+        public void Deposit(decimal amount)
+        {
             if (IsClosed)
                 return;
             ManageUnfreezing();
@@ -22,7 +33,8 @@ namespace StateDesignPattern.Core {
             Balance += amount;
         }
 
-        public void Withdraw(decimal amount) {
+        public void Withdraw(decimal amount)
+        {
             if (IsClosed)
                 return;
             if (!IsVerified)
@@ -32,31 +44,28 @@ namespace StateDesignPattern.Core {
             Balance -= amount;
         }
 
-        private void ManageUnfreezing() {
-            if (IsFrozen) {
-                Unfreeze();
-            }
-            else {
-                StayUnfrozen();
-            }
-        }
 
-        private void Unfreeze() {
+
+        private void Unfreeze()
+        {
             IsFrozen = false;
             OnUnfreeze();
         }
 
-        private void StayUnfrozen() {}
+        private void StayUnfrozen() { }
 
-        public void HolderVerified() {
+        public void HolderVerified()
+        {
             IsVerified = true;
         }
 
-        public void Close() {
+        public void Close()
+        {
             IsClosed = true;
         }
 
-        public void Freeze() {
+        public void Freeze()
+        {
             if (IsClosed)
                 return;
             if (!IsVerified)
