@@ -34,10 +34,19 @@ namespace StateDesignPattern.Core {
 
         private void ManageUnfreezing() {
             if (IsFrozen) {
-                IsFrozen = false;
-                OnUnfreeze();
+                Unfreeze();
+            }
+            else {
+                StayUnfrozen();
             }
         }
+
+        private void Unfreeze() {
+            IsFrozen = false;
+            OnUnfreeze();
+        }
+
+        private void StayUnfrozen() {}
 
         public void HolderVerified() {
             IsVerified = true;
