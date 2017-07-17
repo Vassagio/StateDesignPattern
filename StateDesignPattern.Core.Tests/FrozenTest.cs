@@ -88,6 +88,17 @@ namespace StateDesignPattern.Core.Tests {
             Assert.IsType<Closed>(newState);
         }
 
+        [Fact]
+        public void NotVerified_ReturnsCurrentState()
+        {
+            var state = BuildFrozen();
+
+            var newState = state.HolderVerified();
+
+            Assert.Equal(state, newState);
+            Assert.IsType<Frozen>(newState);
+        }
+
         private static Frozen BuildFrozen(Action action = null) {
             action = action ?? (() => new MockAction().Run());
             return new Frozen(action);

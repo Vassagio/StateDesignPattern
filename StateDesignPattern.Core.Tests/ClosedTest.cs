@@ -50,6 +50,17 @@ namespace StateDesignPattern.Core.Tests {
             Assert.IsType<Closed>(newState);
         }
 
+        [Fact]
+        public void NotVerified_ReturnsCurrentState()
+        {
+            var state = BuildClosed();
+
+            var newState = state.HolderVerified();
+
+            Assert.Equal(state, newState);
+            Assert.IsType<Closed>(newState);
+        }
+
         private static Closed BuildClosed() {
             return new Closed();
         }

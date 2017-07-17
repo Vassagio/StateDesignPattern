@@ -6,5 +6,6 @@ namespace StateDesignPattern.Core {
         IState Withdraw(Action removeFromBalance);
         IState Freeze();
         IState Close();
+        IState HolderVerified();
     }
 }

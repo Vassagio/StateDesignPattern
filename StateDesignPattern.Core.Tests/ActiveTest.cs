@@ -69,6 +69,17 @@ namespace StateDesignPattern.Core.Tests {
             Assert.IsType<Closed>(newState);
         }
 
+        [Fact]
+        public void NotVerified_ReturnsCurrentState()
+        {
+            var state = BuildActive();
+
+            var newState = state.HolderVerified();
+
+            Assert.Equal(state, newState);
+            Assert.IsType<Active>(newState);
+        }
+
         private static Active BuildActive(Action action = null) {
             action = action ?? (() => new MockAction().Run());
             return new Active(action);
