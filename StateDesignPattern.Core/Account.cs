@@ -9,15 +9,13 @@ namespace StateDesignPattern.Core {
         private Action OnUnfreeze { get; }
         private Action ManageUnfreezing { get; set; }
 
-        public Account(decimal startingBalance, Action onUnfreeze)
-        {
+        public Account(decimal startingBalance, Action onUnfreeze) {
             Balance = startingBalance;
             OnUnfreeze = onUnfreeze;
             ManageUnfreezing = StayUnfrozen;
         }
 
-        public void Deposit(decimal amount)
-        {
+        public void Deposit(decimal amount) {
             if (IsClosed)
                 return;
             ManageUnfreezing();
@@ -25,8 +23,7 @@ namespace StateDesignPattern.Core {
             Balance += amount;
         }
 
-        public void Withdraw(decimal amount)
-        {
+        public void Withdraw(decimal amount) {
             if (IsClosed)
                 return;
             if (!IsVerified)
@@ -36,29 +33,15 @@ namespace StateDesignPattern.Core {
             Balance -= amount;
         }
 
-
-
-        private void Unfreeze()
-        {
-            IsFrozen = false;
-            OnUnfreeze();
-            ManageUnfreezing = StayUnfrozen;
-        }
-
-        private void StayUnfrozen() { }
-
-        public void HolderVerified()
-        {
+        public void HolderVerified() {
             IsVerified = true;
         }
 
-        public void Close()
-        {
+        public void Close() {
             IsClosed = true;
         }
 
-        public void Freeze()
-        {
+        public void Freeze() {
             if (IsClosed)
                 return;
             if (!IsVerified)
@@ -66,5 +49,13 @@ namespace StateDesignPattern.Core {
             IsFrozen = true;
             ManageUnfreezing = Unfreeze;
         }
+
+        private void Unfreeze() {
+            IsFrozen = false;
+            OnUnfreeze();
+            ManageUnfreezing = StayUnfrozen;
+        }
+
+        private void StayUnfrozen() { }
     }
 }

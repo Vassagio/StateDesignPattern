@@ -69,6 +69,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccountTest.cs" />
+    <Compile Include="ActiveTest.cs" />
+    <Compile Include="FrozenTest.cs" />
     <Compile Include="MockAction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
