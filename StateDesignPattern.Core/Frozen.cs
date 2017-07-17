@@ -11,13 +11,13 @@ namespace StateDesignPattern.Core {
         public IState Deposit(Action addToBalance) {
             _onUnfreeze();
             addToBalance();
-            return new Active();
+            return new Active(_onUnfreeze);
         }
 
         public IState Withdraw(Action removeFromBalance) {
             _onUnfreeze();
             removeFromBalance();
-            return new Active();
+            return new Active(_onUnfreeze);
         }
 
         public IState Freeze() => this;

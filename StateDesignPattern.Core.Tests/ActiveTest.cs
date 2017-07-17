@@ -16,9 +16,63 @@ namespace StateDesignPattern.Core.Tests {
             Assert.IsAssignableFrom<IState>(state);
         }
 
-        private static Active BuildActive()
+        [Fact]
+        public void Freeze_ReturnsFrozenState() {
+            var state = BuildActive();
+
+            var newState = state.Freeze();
+
+            Assert.IsType<Frozen>(newState);
+        }
+
+        [Fact]
+        public void Deposit_ReturnsCurrentState()
         {
-            return new Active();
+            var state = BuildActive();
+
+            var newState = state.Deposit(() => new MockAction().Run());
+
+            Assert.Equal(state, newState);
+            Assert.IsType<Active>(newState);
+        }
+
+        [Fact]
+        public void Deposit_AddToBalanceInvokedWhenAccountIsFrozen()
+        {
+            var addToBalance = new MockAction();
+            var state = BuildActive();
+
+            state.Deposit(() => addToBalance.Run());
+
+            addToBalance.VerifyRunCalled();
+        }
+
+        [Fact]
+        public void Withdraw_ReturnsCurrentState()
+        {
+            var state = BuildActive();
+
+            var newState = state.Withdraw(() => new MockAction().Run());
+
+            Assert.Equal(state, newState);
+            Assert.IsType<Active>(newState);
+        }
+
+        [Fact]
+        public void Withdraw_RemoveFromBalanceInvokedWhenAccountIsFrozen()
+        {
+            var removeFromBalance = new MockAction();
+            var state = BuildActive();
+
+            state.Withdraw(() => removeFromBalance.Run());
+
+            removeFromBalance.VerifyRunCalled();
+        }
+
+        private static Active BuildActive(Action action = null)
+        {
+            action = action ?? (() => new MockAction().Run());
+            return new Active(action);
         }
     }
 }

@@ -2,16 +2,22 @@
 
 namespace StateDesignPattern.Core {
     public class Active : IState {
+
+        private readonly Action _onUnfreeze;
+        public Active(Action onUnfreeze)
+        {
+            _onUnfreeze = onUnfreeze;
+        }
         public IState Deposit(Action addToBalance) {
-            throw new NotImplementedException();
+            addToBalance();
+            return this;
         }
 
         public IState Withdraw(Action removeFromBalance) {
-            throw new NotImplementedException();
+            removeFromBalance();
+            return this;
         }
 
-        public IState Freeze() {
-            throw new NotImplementedException();
-        }
+        public IState Freeze() => new Frozen(_onUnfreeze);
     }
 }
