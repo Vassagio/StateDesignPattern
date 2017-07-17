@@ -69,6 +69,17 @@ namespace StateDesignPattern.Core.Tests {
             removeFromBalance.VerifyRunCalled();
         }
 
+
+        [Fact]
+        public void Close_ReturnsClosedState()
+        {
+            var state = BuildActive();
+
+            var newState = state.Close();
+
+            Assert.IsType<Closed>(newState);
+        }
+
         private static Active BuildActive(Action action = null)
         {
             action = action ?? (() => new MockAction().Run());

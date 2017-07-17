@@ -19,5 +19,6 @@ namespace StateDesignPattern.Core {
         }
 
         public IState Freeze() => new Frozen(_onUnfreeze);
+        public IState Close() => new Closed();
     }
 }

@@ -86,6 +86,16 @@ namespace StateDesignPattern.Core.Tests {
             removeFromBalance.VerifyRunCalled();
         }
 
+        [Fact]
+        public void Close_ReturnsClosedState()
+        {
+            var state = BuildFrozen();
+
+            var newState = state.Close();
+
+            Assert.IsType<Closed>(newState);
+        }
+
         private static Frozen BuildFrozen(Action action = null) {
             action = action ?? (() => new MockAction().Run());
             return new Frozen(action);

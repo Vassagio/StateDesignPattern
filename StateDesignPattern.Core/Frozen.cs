@@ -21,5 +21,6 @@ namespace StateDesignPattern.Core {
         }
 
         public IState Freeze() => this;
+        public IState Close() => new Closed();
     }
 }

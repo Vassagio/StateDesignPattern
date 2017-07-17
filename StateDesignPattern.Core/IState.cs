@@ -5,5 +5,6 @@ namespace StateDesignPattern.Core {
         IState Deposit(Action addToBalance);
         IState Withdraw(Action removeFromBalance);
         IState Freeze();
+        IState Close();
     }
 }
