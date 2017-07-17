@@ -73,6 +73,7 @@
     <Compile Include="ClosedTest.cs" />
     <Compile Include="FrozenTest.cs" />
     <Compile Include="MockAction.cs" />
+    <Compile Include="NotVerifiedTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

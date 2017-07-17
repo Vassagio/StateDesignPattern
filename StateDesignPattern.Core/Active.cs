@@ -2,12 +2,12 @@
 
 namespace StateDesignPattern.Core {
     public class Active : IState {
-
         private readonly Action _onUnfreeze;
-        public Active(Action onUnfreeze)
-        {
+
+        public Active(Action onUnfreeze) {
             _onUnfreeze = onUnfreeze;
         }
+
         public IState Deposit(Action addToBalance) {
             addToBalance();
             return this;
@@ -18,7 +18,12 @@ namespace StateDesignPattern.Core {
             return this;
         }
 
-        public IState Freeze() => new Frozen(_onUnfreeze);
-        public IState Close() => new Closed();
+        public IState Freeze() {
+            return new Frozen(_onUnfreeze);
+        }
+
+        public IState Close() {
+            return new Closed();
+        }
     }
 }

@@ -15,8 +15,7 @@ namespace StateDesignPattern.Core.Tests {
             Assert.Equal(times, _timesExecuted);
         }
 
-        public void VerifyRunNotCalled()
-        {
+        public void VerifyRunNotCalled() {
             Assert.False(_hasRun);
             Assert.Equal(0, _timesExecuted);
         }

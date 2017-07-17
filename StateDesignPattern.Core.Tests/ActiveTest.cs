@@ -1,15 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace StateDesignPattern.Core.Tests {
     public class ActiveTest {
         [Fact]
-        public void Initialize()
-        {
+        public void Initialize() {
             var state = BuildActive();
 
             Assert.NotNull(state);
@@ -26,8 +21,7 @@ namespace StateDesignPattern.Core.Tests {
         }
 
         [Fact]
-        public void Deposit_ReturnsCurrentState()
-        {
+        public void Deposit_ReturnsCurrentState() {
             var state = BuildActive();
 
             var newState = state.Deposit(() => new MockAction().Run());
@@ -37,8 +31,7 @@ namespace StateDesignPattern.Core.Tests {
         }
 
         [Fact]
-        public void Deposit_AddToBalanceInvokedWhenAccountIsFrozen()
-        {
+        public void Deposit_AddToBalanceInvoked() {
             var addToBalance = new MockAction();
             var state = BuildActive();
 
@@ -48,8 +41,7 @@ namespace StateDesignPattern.Core.Tests {
         }
 
         [Fact]
-        public void Withdraw_ReturnsCurrentState()
-        {
+        public void Withdraw_ReturnsCurrentState() {
             var state = BuildActive();
 
             var newState = state.Withdraw(() => new MockAction().Run());
@@ -59,8 +51,7 @@ namespace StateDesignPattern.Core.Tests {
         }
 
         [Fact]
-        public void Withdraw_RemoveFromBalanceInvokedWhenAccountIsFrozen()
-        {
+        public void Withdraw_RemoveFromBalanceInvoked() {
             var removeFromBalance = new MockAction();
             var state = BuildActive();
 
@@ -69,10 +60,8 @@ namespace StateDesignPattern.Core.Tests {
             removeFromBalance.VerifyRunCalled();
         }
 
-
         [Fact]
-        public void Close_ReturnsClosedState()
-        {
+        public void Close_ReturnsClosedState() {
             var state = BuildActive();
 
             var newState = state.Close();
@@ -80,8 +69,7 @@ namespace StateDesignPattern.Core.Tests {
             Assert.IsType<Closed>(newState);
         }
 
-        private static Active BuildActive(Action action = null)
-        {
+        private static Active BuildActive(Action action = null) {
             action = action ?? (() => new MockAction().Run());
             return new Active(action);
         }

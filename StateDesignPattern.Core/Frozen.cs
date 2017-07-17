@@ -20,7 +20,12 @@ namespace StateDesignPattern.Core {
             return new Active(_onUnfreeze);
         }
 
-        public IState Freeze() => this;
-        public IState Close() => new Closed();
+        public IState Freeze() {
+            return this;
+        }
+
+        public IState Close() {
+            return new Closed();
+        }
     }
 }

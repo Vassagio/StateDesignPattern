@@ -12,8 +12,7 @@ namespace StateDesignPattern.Core.Tests {
         }
 
         [Fact]
-        public void Freeze_ReturnsCurrentState()
-        {
+        public void Freeze_ReturnsCurrentState() {
             var state = BuildFrozen();
 
             var newState = state.Freeze();
@@ -23,8 +22,7 @@ namespace StateDesignPattern.Core.Tests {
         }
 
         [Fact]
-        public void Deposit_ReturnsActiveState()
-        {
+        public void Deposit_ReturnsActiveState() {
             var state = BuildFrozen();
 
             var newState = state.Deposit(() => new MockAction().Run());
@@ -33,19 +31,17 @@ namespace StateDesignPattern.Core.Tests {
         }
 
         [Fact]
-        public void Deposit_UnfreezeInvokedWhenAccountIsFrozen()
-        {
+        public void Deposit_UnfreezeInvoked() {
             var action = new MockAction();
             var state = BuildFrozen(() => action.Run());
-            
+
             state.Deposit(() => new MockAction().Run());
 
             action.VerifyRunCalled();
         }
 
         [Fact]
-        public void Deposit_AddToBalanceInvokedWhenAccountIsFrozen()
-        {            
+        public void Deposit_AddToBalanceInvoked() {
             var addToBalance = new MockAction();
             var state = BuildFrozen();
 
@@ -55,8 +51,7 @@ namespace StateDesignPattern.Core.Tests {
         }
 
         [Fact]
-        public void Withdraw_ReturnsActiveState()
-        {
+        public void Withdraw_ReturnsActiveState() {
             var state = BuildFrozen();
 
             var newState = state.Withdraw(() => new MockAction().Run());
@@ -65,8 +60,7 @@ namespace StateDesignPattern.Core.Tests {
         }
 
         [Fact]
-        public void Withdraw_UnfreezeInvokedWhenAccountIsFrozen()
-        {
+        public void Withdraw_UnfreezeInvoked() {
             var action = new MockAction();
             var state = BuildFrozen(() => action.Run());
 
@@ -76,8 +70,7 @@ namespace StateDesignPattern.Core.Tests {
         }
 
         [Fact]
-        public void Withdraw_RemoveFromBalanceInvokedWhenAccountIsFrozen()
-        {
+        public void Withdraw_RemoveFromBalanceInvoked() {
             var removeFromBalance = new MockAction();
             var state = BuildFrozen();
 
@@ -87,8 +80,7 @@ namespace StateDesignPattern.Core.Tests {
         }
 
         [Fact]
-        public void Close_ReturnsClosedState()
-        {
+        public void Close_ReturnsClosedState() {
             var state = BuildFrozen();
 
             var newState = state.Close();

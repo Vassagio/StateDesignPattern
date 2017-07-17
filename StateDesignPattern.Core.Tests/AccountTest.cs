@@ -2,13 +2,12 @@
 using Xunit;
 
 namespace StateDesignPattern.Core.Tests {
-    public class AccountTest {        
-
+    public class AccountTest {
         [Fact]
         public void Initialize() {
             var account = BuildAccount();
 
-            Assert.NotNull(account);            
+            Assert.NotNull(account);
         }
 
         [Fact]
@@ -19,8 +18,7 @@ namespace StateDesignPattern.Core.Tests {
         }
 
         [Fact]
-        public void Initialize_SetsIsClosed_False()
-        {
+        public void Initialize_SetsIsClosed_False() {
             var account = BuildAccount();
 
             Assert.False(account.IsClosed);
@@ -36,8 +34,7 @@ namespace StateDesignPattern.Core.Tests {
         }
 
         [Fact]
-        public void Close_SetsIsClosed_True()
-        {
+        public void Close_SetsIsClosed_True() {
             var account = BuildAccount();
 
             account.Close();
@@ -58,11 +55,10 @@ namespace StateDesignPattern.Core.Tests {
         }
 
         [Fact]
-        public void Deposit_BalanceDoesNotChangeWhenAccountClosed()
-        {
+        public void Deposit_BalanceDoesNotChangeWhenAccountClosed() {
             const decimal STARTING_AMOUNT = 10;
             var account = BuildAccount(STARTING_AMOUNT);
-            
+
             account.Close();
             account.Deposit(5);
 
@@ -70,8 +66,7 @@ namespace StateDesignPattern.Core.Tests {
         }
 
         [Fact]
-        public void Deposit_BalanceChangesWhenAccountIsFrozen()
-        {
+        public void Deposit_BalanceChangesWhenAccountIsFrozen() {
             const decimal STARTING_AMOUNT = 10;
             var account = BuildAccount(STARTING_AMOUNT);
 
@@ -82,21 +77,19 @@ namespace StateDesignPattern.Core.Tests {
         }
 
         [Fact]
-        public void Deposit_SetsIsFrozen_False()
-        {
-            var action = new MockAction();            
+        public void Deposit_SetsIsFrozen_False() {
+            var action = new MockAction();
             var account = BuildAccount(action: () => action.Run());
 
             account.HolderVerified();
-            account.Freeze();            
+            account.Freeze();
             account.Deposit(10);
 
             Assert.False(account.IsFrozen);
         }
 
         [Fact]
-        public void Deposit_UnfreezeInvokedWhenAccountIsFrozen()
-        {
+        public void Deposit_UnfreezeInvokedWhenAccountIsFrozen() {
             var action = new MockAction();
             var account = BuildAccount(action: () => action.Run());
 
@@ -108,8 +101,7 @@ namespace StateDesignPattern.Core.Tests {
         }
 
         [Fact]
-        public void Withdraw_BalanceChangesWhenAccountIsVerifiedAndOpen()
-        {
+        public void Withdraw_BalanceChangesWhenAccountIsVerifiedAndOpen() {
             const decimal STARTING_AMOUNT = 10;
             var account = BuildAccount(STARTING_AMOUNT);
 
@@ -119,21 +111,18 @@ namespace StateDesignPattern.Core.Tests {
             Assert.Equal(5, account.Balance);
         }
 
-
         [Fact]
-        public void Withdraw_BalanceDoesNotChangeWhenAccountNotVerified()
-        {
+        public void Withdraw_BalanceDoesNotChangeWhenAccountNotVerified() {
             const decimal STARTING_AMOUNT = 10;
             var account = BuildAccount(STARTING_AMOUNT);
-            
+
             account.Withdraw(5);
 
             Assert.Equal(10, account.Balance);
         }
 
         [Fact]
-        public void Withdraw_BalanceDoesNotChangeWhenAccountClosed()
-        {
+        public void Withdraw_BalanceDoesNotChangeWhenAccountClosed() {
             const decimal STARTING_AMOUNT = 10;
             var account = BuildAccount(STARTING_AMOUNT);
 
@@ -145,8 +134,7 @@ namespace StateDesignPattern.Core.Tests {
         }
 
         [Fact]
-        public void Withdraw_BalanceChangesWhenAccountIsFrozen()
-        {
+        public void Withdraw_BalanceChangesWhenAccountIsFrozen() {
             const decimal STARTING_AMOUNT = 10;
             var account = BuildAccount(STARTING_AMOUNT);
 
@@ -158,8 +146,7 @@ namespace StateDesignPattern.Core.Tests {
         }
 
         [Fact]
-        public void Withdraw_SetsIsFrozen_False()
-        {
+        public void Withdraw_SetsIsFrozen_False() {
             var action = new MockAction();
             var account = BuildAccount(action: () => action.Run());
 
@@ -171,8 +158,7 @@ namespace StateDesignPattern.Core.Tests {
         }
 
         [Fact]
-        public void Withdraw_UnfreezeInvokedWhenAccountIsFrozen()
-        {
+        public void Withdraw_UnfreezeInvokedWhenAccountIsFrozen() {
             var action = new MockAction();
             var account = BuildAccount(action: () => action.Run());
 
@@ -184,8 +170,7 @@ namespace StateDesignPattern.Core.Tests {
         }
 
         [Fact]
-        public void Freeze_AccountFrozenWhenNotClosedAndVerified()
-        {            
+        public void Freeze_AccountFrozenWhenNotClosedAndVerified() {
             var account = BuildAccount();
 
             account.HolderVerified();
@@ -194,10 +179,8 @@ namespace StateDesignPattern.Core.Tests {
             Assert.True(account.IsFrozen);
         }
 
-
         [Fact]
-        public void Freeze_AccountNotFrozenWhenClosed()
-        {
+        public void Freeze_AccountNotFrozenWhenClosed() {
             const decimal STARTING_AMOUNT = 10;
             var account = BuildAccount(STARTING_AMOUNT);
 
@@ -209,8 +192,7 @@ namespace StateDesignPattern.Core.Tests {
         }
 
         [Fact]
-        public void Freeze_AccountNotFrozenWhenNotVerified()
-        {
+        public void Freeze_AccountNotFrozenWhenNotVerified() {
             const decimal STARTING_AMOUNT = 10;
             var account = BuildAccount(STARTING_AMOUNT);
 

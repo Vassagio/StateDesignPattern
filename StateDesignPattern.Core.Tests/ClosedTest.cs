@@ -21,8 +21,7 @@ namespace StateDesignPattern.Core.Tests {
         }
 
         [Fact]
-        public void Deposit_ReturnsCurrentState()
-        {
+        public void Deposit_ReturnsCurrentState() {
             var state = BuildClosed();
 
             var newState = state.Deposit(() => new MockAction().Run());
@@ -32,8 +31,7 @@ namespace StateDesignPattern.Core.Tests {
         }
 
         [Fact]
-        public void Withdraw_ReturnsCurrentState()
-        {
+        public void Withdraw_ReturnsCurrentState() {
             var state = BuildClosed();
 
             var newState = state.Withdraw(() => new MockAction().Run());
@@ -43,8 +41,7 @@ namespace StateDesignPattern.Core.Tests {
         }
 
         [Fact]
-        public void Closed_ReturnsCurrentState()
-        {
+        public void Closed_ReturnsCurrentState() {
             var state = BuildClosed();
 
             var newState = state.Close();
