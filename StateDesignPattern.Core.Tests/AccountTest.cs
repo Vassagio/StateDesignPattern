@@ -116,7 +116,7 @@ namespace StateDesignPattern.Core.Tests {
         private static Account BuildAccount(decimal? startingBalance = null, Action action = null) {
             startingBalance = startingBalance ?? 10;
             action = action ?? (() => new MockAction().Run());
-            return new Account(startingBalance.Value, action);
+            return Account.Create(startingBalance.Value, action);
         }
     }
 }

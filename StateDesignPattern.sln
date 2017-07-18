@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StateDesignPattern.Core", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StateDesignPattern.Core.Tests", "StateDesignPattern.Core.Tests\StateDesignPattern.Core.Tests.csproj", "{61F59AE2-EF5D-4D5D-9BEE-FF0F7735050B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StateDesignPattern.UI", "StateDesignPattern.UI\StateDesignPattern.UI.csproj", "{8875BCA2-918A-4783-9969-89055DD5B151}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{61F59AE2-EF5D-4D5D-9BEE-FF0F7735050B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{61F59AE2-EF5D-4D5D-9BEE-FF0F7735050B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{61F59AE2-EF5D-4D5D-9BEE-FF0F7735050B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8875BCA2-918A-4783-9969-89055DD5B151}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8875BCA2-918A-4783-9969-89055DD5B151}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8875BCA2-918A-4783-9969-89055DD5B151}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8875BCA2-918A-4783-9969-89055DD5B151}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

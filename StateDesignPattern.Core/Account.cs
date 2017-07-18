@@ -5,7 +5,10 @@ namespace StateDesignPattern.Core {
         public decimal Balance { get; private set; }        
         private IState State { get; set; }
 
-        public Account(decimal startingBalance, Action onUnfreeze) {
+        public static Account Create(decimal startingBalance, Action onUnfreeze) {
+            return new Account(startingBalance, onUnfreeze);
+        }
+        private Account(decimal startingBalance, Action onUnfreeze) {
             Balance = startingBalance;
             State = new NotVerified(onUnfreeze);
         }
@@ -28,6 +31,9 @@ namespace StateDesignPattern.Core {
 
         public void Freeze() {
             State = State.Freeze();
-        }        
+        }
+
+        public override string ToString() => $"Current Balance: {Balance}";
+        
     }
 }
